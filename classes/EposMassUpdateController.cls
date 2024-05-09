@@ -17,36 +17,36 @@ public with sharing class EposMassUpdateController {
         try {	
             List<String> recordIdsToUpdate = csvData.split('\n');//Apex--lwc accepts header and other columns- replaced , with \n
             
-            List<p66_EPOS__c> eposRecords = [SELECT Id,
-                                             p66_HPS_Notification_Flag__c,
-                                             p66_HPS_Notification_Type__c,
-                                             p66_PDL30_Flag__c,
-                                             p66_PDL40_Flag__c,
-                                             p66_PDL50_Flag__c,
-                                             p66_PDL60_Flag__c,
-                                             p66_PDL70_Flag__c,
-                                             p66_PDL80_Flag__c
-                                             FROM p66_EPOS__c
+            List<EPOS__c> eposRecords = [SELECT Id,
+                                             HPS_Notification_Flag__c,
+                                             HPS_Notification_Type__c,
+                                             PDL30_Flag__c,
+                                             PDL40_Flag__c,
+                                             PDL50_Flag__c,
+                                             PDL60_Flag__c,
+                                             PDL70_Flag__c,
+                                             PDL80_Flag__c
+                                             FROM EPOS__c
                                              WHERE Id 
                                              IN :recordIdsToUpdate];
             
-            for (p66_EPOS__c record : eposRecords) {
-                record.p66_HPS_Notification_Flag__c = true;
-                record.p66_HPS_Notification_Type__c='Modify';
+            for (EPOS__c record : eposRecords) {
+                record.HPS_Notification_Flag__c = true;
+                record.HPS_Notification_Type__c='Modify';
                 
                 for(String checkboxValue: selectedCheckboxes){
                     if(checkboxValue=='PDL_30'){
-                        record.p66_PDL30_Flag__c=true;
+                        record.PDL30_Flag__c=true;
                     }else if(checkboxValue=='PDL_40'){
-                        record.p66_PDL40_Flag__c=true;
+                        record.PDL40_Flag__c=true;
                     } else if(checkboxValue=='PDL_50'){
-                        record.p66_PDL50_Flag__c=true;
+                        record.PDL50_Flag__c=true;
                     } else if(checkboxValue=='PDL_60'){
-                        record.p66_PDL60_Flag__c=true;
+                        record.PDL60_Flag__c=true;
                     } else if(checkboxValue=='PDL_70'){
-                        record.p66_PDL70_Flag__c=true;
+                        record.PDL70_Flag__c=true;
                     } else if(checkboxValue=='PDL_80'){
-                        record.p66_PDL80_Flag__c=true;
+                        record.PDL80_Flag__c=true;
                     }	
                 }
             }
